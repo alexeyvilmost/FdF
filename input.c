@@ -6,7 +6,7 @@
 /*   By: pallspic <pallspic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/05 11:55:38 by pallspic          #+#    #+#             */
-/*   Updated: 2019/09/19 18:24:24 by pallspic         ###   ########.fr       */
+/*   Updated: 2019/09/20 00:33:13 by pallspic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,18 +36,25 @@ t_coor	**fill_map(const int *m, t_main d)
 	return (ret);
 }
 
-int		*vector_conv(t_list *main, int n, int m)
+int		*vector_conv(t_list *main, t_main *data)
 {
+	t_list	*temp;
 	int		*vector;
 	int		i;
 
 	i = 0;
-	vector = (int *)ft_memalloc(n * m * sizeof(int));
-	while (i < n * m)
+	temp = main;
+	(data->m) ? data->n /= data->m : 0;
+	data->max_z = 0;
+	vector = (int *)ft_memalloc(data->n * data->m * sizeof(int));
+	while (i < data->n * data->m)
 	{
-		vector[i++] = main->content;
-		main = main->next;
+		if (temp->content > data->max_z)
+			data->max_z = temp->content;
+		vector[i++] = temp->content;
+		temp = temp->next;
 	}
+	ft_lstdel(&main);
 	return (vector);
 }
 
@@ -64,18 +71,18 @@ int		*input_init(int fd, t_main *data)
 	{
 		nums = ft_strsplit(line, ' ');
 		i = 0;
-		while (nums[i])
+		while (nums && nums[i])
 		{
 			temp = ft_lstnew(ft_atoi(nums[i]));
 			ft_lstadd(&main, temp);
 			main = temp;
-			i++;
 			data->n++;
 			free(nums[i]);
+			i++;
 		}
 		free(nums);
+		free(line);
 		data->m++;
 	}
-	(data->m) ? data->n /= data->m : 0;
-	return (vector_conv(main, data->n, data->m));
+	return (vector_conv(main, data));
 }

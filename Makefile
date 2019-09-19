@@ -6,7 +6,7 @@
 #    By: pallspic <pallspic@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/07/21 15:21:19 by pallspic          #+#    #+#              #
-#    Updated: 2019/09/19 18:56:57 by pallspic         ###   ########.fr        #
+#    Updated: 2019/09/19 19:13:09 by pallspic         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@
 
 .PHONY: all re clean fclean libft
 
-CFLAGS = -Wall -Werror -Wextra -Iincludes
+CFLAGS = -Wall -Wextra -Iincludes
 
 LIB_MAKE = make -C $(LIB_DIR)
 

@@ -6,7 +6,7 @@
 /*   By: pallspic <pallspic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/06 15:07:04 by pallspic          #+#    #+#             */
-/*   Updated: 2019/08/26 02:25:12 by pallspic         ###   ########.fr       */
+/*   Updated: 2019/09/19 22:33:20 by pallspic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ char		**ft_strsplit(char const *s1, char c)
 	int		words;
 
 	words = spl_word_c(s1, c);
-	if (!s1 || !(ret = ft_memalloc((sizeof(char *) * words) + 1)))
+	if (!s1 || !(ret = ft_memalloc((sizeof(char *) * (words + 1)))))
 		return (FALSE);
 	i = 0;
 	j = 0;
